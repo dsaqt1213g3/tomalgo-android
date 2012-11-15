@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvPlayers0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="40dip"
+        android:layout_marginTop="40dip"
+        android:text="@string/hello_world"
+        android:textSize="20dip"
+        tools:context=".ScoreActivity" />
+
+    <TextView
+        android:id="@+id/tvPlayers1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="40dip"
+        android:layout_marginTop="40dip"
+        android:text="@string/hello_world"
+        android:textSize="20dip"
+        tools:context=".ScoreActivity" />
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/tvPlayers1"
+        android:layout_below="@id/tvPlayers0"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="@string/hello_world"
+        android:textSize="40dip"
+        android:textStyle="bold"
+        tools:context=".ScoreActivity" />
+
+</RelativeLayout>

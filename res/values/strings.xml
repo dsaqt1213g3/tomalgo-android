@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">La Ley del Mus</string>
+    <string name="title_activity_login">Inicio de sesión</string>
+    <string name="title_activity_register">Registro</string>
+    <string name="l_username">Username</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main_layout">Lista de partidas</string>
+    <string name="title_activity_score">Resultado</string>
+
+</resources>
