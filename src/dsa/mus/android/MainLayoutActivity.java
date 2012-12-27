@@ -36,20 +36,18 @@ public class MainLayoutActivity extends Activity {
 			try {
 				String status = (String) jsonobject.get("status");
 				if (status.equals("OK")) {
+					Log.d(TAG,"Recibido OK");
 					array = jsonobject.getJSONArray("result");
 					String[] values = new String[array.length()];
 					for (int i = 0; i < array.length(); i++) {
 						JSONObject game = array.getJSONObject(i);
-						values[i] = game.getString("player0") + " & "
-								+ game.getString("player2") + " vs. "
-								+ game.getString("player1") + " & "
-								+ game.getString("player3");
-						Log.d(TAG, game.getInt("gameid") + "");
-						Log.d(TAG, game.getString("player0"));
-						Log.d(TAG, game.getString("player1"));
-						Log.d(TAG, game.getString("player2"));
-						Log.d(TAG, game.getString("player3"));
-						Log.d(TAG, game.getString("score"));
+						values[i] = game.getString("title");
+						Log.d(TAG, game.getString("post"));
+						
+
+
+							JSONObject test = array.getJSONObject(i);
+							values[i] = test.getString("post");
 					}
 					setValues(values);
 					dismissDialog(ID_DIALOG_FETCHING);
@@ -118,19 +116,14 @@ public class MainLayoutActivity extends Activity {
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
 			public void onItemClick(AdapterView<?> view, View parent,
 					int position, long id) {
 				Intent intent = new Intent(getApplicationContext(),
 						ScoreActivity.class);
 				try {
 					Log.d(TAG, array.getJSONObject(position).toString());
-					JSONObject game = array.getJSONObject(position);
-					intent.putExtra("players0", game.getString("player0")
-							+ " & " + game.getString("player2"));
-					intent.putExtra("players1", game.getString("player1")
-							+ " & " + game.getString("player3"));
-					intent.putExtra("score", game.getString("score"));
+					JSONObject games = array.getJSONObject(position);
+					intent.putExtra("players0", games.getString("post"));
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -70,7 +70,7 @@ public class MusServiceApi {
 		Log.d(TAG, "listGames");
 		HttpGet request = new HttpGet();
 		try {
-			URI reqURI = new URI(uri + "action=listgames&username=" + username);
+			URI reqURI = new URI(uri + "action=listposts&username=" + username);
 			request.setURI(reqURI);
 			HttpResponse response = httpclient.execute(request);
 			Log.d(TAG, response.getStatusLine().getReasonPhrase() + " - "

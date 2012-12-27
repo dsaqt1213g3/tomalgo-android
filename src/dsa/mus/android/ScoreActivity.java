@@ -14,9 +14,9 @@ public class ScoreActivity extends Activity {
 		setContentView(R.layout.score_layout);
 		((TextView) findViewById(R.id.tvPlayers0)).setText(bundle
 				.getString("players0"));
-		((TextView) findViewById(R.id.tvPlayers1)).setText(bundle
-				.getString("players1"));
-		((TextView) findViewById(R.id.tvScore)).setText(bundle
-				.getString("score"));
+//		((TextView) findViewById(R.id.tvPlayers1)).setText(bundle
+//				.getString("players1"));
+//		((TextView) findViewById(R.id.tvScore)).setText(bundle
+//				.getString("score"));
 	}
 }

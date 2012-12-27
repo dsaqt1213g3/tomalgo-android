@@ -79,7 +79,6 @@ public class LoginActivity extends Activity {
 					builder.setPositiveButton("Aceptar",
 							new DialogInterface.OnClickListener() {
 
-								@Override
 								public void onClick(DialogInterface dialog,
 										int id) {
 									dialog.dismiss();
@@ -90,7 +89,6 @@ public class LoginActivity extends Activity {
 				} else {
 					JSONObject user = (JSONObject) jsonobject.get("result");
 					Log.d(TAG, (String) user.get("username"));
-					Log.d(TAG, (String) user.get("email"));
 					Log.d(TAG, ((Integer) user.get("id")).toString());
 
 					Intent intent = new Intent(activity,
@@ -98,7 +96,6 @@ public class LoginActivity extends Activity {
 					Log.d(TAG, intent.toString());
 					intent.putExtra("id", (Integer) user.get("id"));
 					intent.putExtra("username", (String) user.get("username"));
-					intent.putExtra("email", (String) user.get("email"));
 					startActivity(intent);
 
 				}
