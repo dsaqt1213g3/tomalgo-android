@@ -1,4 +1,4 @@
-package dsa.mus.android.api;
+package dsa.tomalgo.android.api;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,4 +1,4 @@
-package dsa.mus.android;
+package dsa.tomalgo.android;
 
 import java.io.IOException;
 
@@ -7,7 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dsa.mus.android.api.MusServiceApi;
+import dsa.tomalgo.android.R;
+import dsa.tomalgo.android.api.MusServiceApi;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
