@@ -32,7 +32,8 @@ public class MainLayoutActivity extends Activity {
 	private class FetchGamesList extends AsyncTask<String, Void, JSONObject> {
 		@Override
 		protected void onPostExecute(JSONObject jsonobject) {
-
+			
+			Log.d(TAG, "Starting");
 			try {
 				String status = (String) jsonobject.get("status");
 				if (status.equals("OK")) {
@@ -70,7 +71,7 @@ public class MainLayoutActivity extends Activity {
 		protected JSONObject doInBackground(String... params) {
 			JSONObject jsonobject = null;
 			try {
-				Log.d(TAG, "FetchGamesList doInBackground");
+				Log.d(TAG, "FetchGamesList doInBackground, params[0]: " +params[0]);
 				String content[] = MusServiceApi.getInstance(
 						getApplicationContext()).listGames(params[0]);
 				for (int i = 0; i < content.length; i++)
@@ -99,10 +100,10 @@ public class MainLayoutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
 		Bundle bundle = this.getIntent().getExtras();
-		Log.d(TAG, bundle.get("id").toString());
+		Log.d(TAG, bundle.get("password").toString());
 
 		showDialog(ID_DIALOG_FETCHING);
-		(new FetchGamesList()).execute(bundle.getString("username"));
+		(new FetchGamesList()).execute(bundle.getString("password"));
 
 	}
 

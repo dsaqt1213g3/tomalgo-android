@@ -42,10 +42,13 @@ public class MusServiceApi {
 
 	public String[] login(String username, String password)
 			throws ClientProtocolException, IOException {
+		
+		String sha1password = SHA1.getInstance().digestToString(password);
+		
 		HttpGet request = new HttpGet();
 		try {
 			URI reqURI = new URI(uri + "action=login&username=" + username
-					+ "&password=" + password);
+					+ "&password=" + sha1password);
 			request.setURI(reqURI);
 			HttpResponse response = httpclient.execute(request);
 			Log.d(TAG, response.getStatusLine().getReasonPhrase() + " - "
@@ -66,11 +69,12 @@ public class MusServiceApi {
 		return null;
 	}
 	
-	public String[] listGames(String username) throws ClientProtocolException, IOException{
+	public String[] listGames(String password) throws ClientProtocolException, IOException{
 		Log.d(TAG, "listGames");
+		String sha1password = SHA1.getInstance().digestToString(password);
 		HttpGet request = new HttpGet();
 		try {
-			URI reqURI = new URI(uri + "action=listposts&username=" + username);
+			URI reqURI = new URI(uri + "action=queryevents&password=" + sha1password);
 			request.setURI(reqURI);
 			HttpResponse response = httpclient.execute(request);
 			Log.d(TAG, response.getStatusLine().getReasonPhrase() + " - "

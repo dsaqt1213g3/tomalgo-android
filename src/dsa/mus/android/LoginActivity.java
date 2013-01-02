@@ -23,6 +23,8 @@ public class LoginActivity extends Activity {
 	private final static String TAG = "LoginActivity";
 	private final static int ID_DIALOG_FETCHING = 0;
 	private final static int ID_DIALOG_EXCEPTION = 1;
+	public String username;
+	public String password;
 
 	private class LoginTask extends AsyncTask<String, Void, JSONObject> {
 		private final static String TAG = "LoginTask";
@@ -71,33 +73,55 @@ public class LoginActivity extends Activity {
 			try {
 				String status = (String) jsonobject.get("status");
 				if (status.equals("KO")) {
+					Log.d(TAG, "Login KO");
 					Log.d(TAG, (String) jsonobject.get("result"));
 					AlertDialog.Builder builder = new AlertDialog.Builder(
 							activity);
 					builder.setMessage((String) jsonobject.get("result"))
-							.setTitle("Error");
+					.setTitle("Format Error");
 					builder.setPositiveButton("Aceptar",
 							new DialogInterface.OnClickListener() {
 
-								public void onClick(DialogInterface dialog,
-										int id) {
-									dialog.dismiss();
+						public void onClick(DialogInterface dialog,
+								int id) {
+							dialog.dismiss();
 
-								}
-							});
+						}
+					});
 					builder.create().show();
 				} else {
-					JSONObject user = (JSONObject) jsonobject.get("result");
-					Log.d(TAG, (String) user.get("username"));
-					Log.d(TAG, ((Integer) user.get("id")).toString());
+					Log.d(TAG, "Login OK");
+					JSONObject result = (JSONObject) jsonobject.get("result");
+					String succeed = (String) result.get("succeed").toString();
+					Log.d(TAG, "succeed: " +succeed);
 
-					Intent intent = new Intent(activity,
-							MainLayoutActivity.class);
-					Log.d(TAG, intent.toString());
-					intent.putExtra("id", (Integer) user.get("id"));
-					intent.putExtra("username", (String) user.get("username"));
-					startActivity(intent);
+					if (succeed.equals("true")){
+						String enterprise = (String) result.get("enterprise").toString();
+						Log.d(TAG, ("enterprise: " +enterprise));
+						Intent intent = new Intent(activity, MainLayoutActivity.class);
+						Log.d(TAG, intent.toString());
+						intent.putExtra("password", password);
+						Log.d(TAG, "Antes");
+						startActivity(intent);
+						Log.d(TAG, "Despues");
 
+					}else {
+						String message = (String) result.get("message").toString();
+						Log.d(TAG, ("message: " +message));
+						AlertDialog.Builder builder = new AlertDialog.Builder(
+								activity);
+						builder.setMessage((String) result.get("message"))
+						.setTitle("Authentication Error");
+						builder.setPositiveButton("Aceptar",
+								new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog,
+									int id) {
+								dialog.dismiss();
+							}
+						});
+						builder.create().show();						
+					}
 				}
 
 			} catch (JSONException e) {
@@ -119,9 +143,9 @@ public class LoginActivity extends Activity {
 	}
 
 	public void loginClicked(View v) {
-		String username = ((EditText) findViewById(R.id.etUsername)).getText()
+		username = ((EditText) findViewById(R.id.etUsername)).getText()
 				.toString();
-		String password = ((EditText) findViewById(R.id.etPassword)).getText()
+		password = ((EditText) findViewById(R.id.etPassword)).getText()
 				.toString();
 		Log.d(TAG, username + "/" + password);
 		showDialog(ID_DIALOG_FETCHING);

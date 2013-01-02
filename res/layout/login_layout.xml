@@ -17,15 +17,15 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="5dip"
-            android:paddingTop="5dip" >
+            android:paddingBottom="0dip"
+            android:paddingTop="4dip" >
 
             <TextView
                 android:id="@+id/lLogo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="DSA Blog"
+                android:text="Login"
                 android:textSize="20dip"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -40,19 +40,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/header"
             android:orientation="vertical"
-            android:padding="30dip" >
+            android:padding="10dip" >
 
             <TextView
                 android:id="@+id/lUsername"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/l_username" />
+                android:text="@string/l_username"
+                android:textStyle="italic"  />
 
             <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dip"
+                android:layout_marginBottom="5dip"
                 android:layout_marginTop="5dip"
                 android:singleLine="true" />
 
@@ -60,12 +61,14 @@
                 android:id="@+id/lPassword"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Contraseña" />
+                android:text="Contraseña"
+                android:textStyle="italic" />
 
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
                 android:layout_marginTop="5dip"
                 android:inputType="textPassword"
                 android:singleLine="true" />
@@ -74,22 +77,11 @@
                 android:id="@+id/bLogin"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dip"
+                android:layout_marginTop="0dip"
                 android:onClick="loginClicked"
-                android:text="Iniciar sesión" />
-
-            <TextView
-                android:id="@+id/lLinkRegister"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="40dip"
-                android:layout_marginTop="40dip"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="showRegisterActivity"
-                android:text="Registrarse en la Ley del Mus"
+                android:text="Iniciar sesión"
                 android:textColor="#0b84aa"
-                android:textSize="16dip" />
+                android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
 
