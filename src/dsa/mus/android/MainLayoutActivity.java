@@ -33,7 +33,6 @@ public class MainLayoutActivity extends Activity {
 		@Override
 		protected void onPostExecute(JSONObject jsonobject) {
 			
-			Log.d(TAG, "Starting");
 			try {
 				String status = (String) jsonobject.get("status");
 				if (status.equals("OK")) {
@@ -42,13 +41,13 @@ public class MainLayoutActivity extends Activity {
 					String[] values = new String[array.length()];
 					for (int i = 0; i < array.length(); i++) {
 						JSONObject game = array.getJSONObject(i);
-						values[i] = game.getString("title");
-						Log.d(TAG, game.getString("post"));
+						values[i] = game.getString("text");
+						Log.d(TAG, game.getString("enterprise"));
 						
 
 
-							JSONObject test = array.getJSONObject(i);
-							values[i] = test.getString("post");
+							//JSONObject test = array.getJSONObject(i);
+							//values[i] = test.getString("enterprise");
 					}
 					setValues(values);
 					dismissDialog(ID_DIALOG_FETCHING);
