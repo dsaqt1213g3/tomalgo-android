@@ -18,13 +18,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.content.Context;
 import android.util.Log;
 
-public class MusServiceApi {
-	private final static String TAG = "MusServiceApi";
+public class TomalgoServiceApi {
+	private final static String TAG = "TomalgoServiceApi";
 	private HttpClient httpclient = null;
 	private String uri = null;
-	private static MusServiceApi instance = null;
+	private static TomalgoServiceApi instance = null;
 
-	private MusServiceApi(Context ctx) throws IOException {
+	private TomalgoServiceApi(Context ctx) throws IOException {
 		super();
 
 		httpclient = new DefaultHttpClient();
@@ -34,9 +34,9 @@ public class MusServiceApi {
 		uri = p.getProperty("uri");
 	}
 
-	public static MusServiceApi getInstance(Context ctx) throws IOException {
+	public static TomalgoServiceApi getInstance(Context ctx) throws IOException {
 		if (instance == null)
-			instance = new MusServiceApi(ctx);
+			instance = new TomalgoServiceApi(ctx);
 		return instance;
 	}
 
@@ -69,8 +69,8 @@ public class MusServiceApi {
 		return null;
 	}
 	
-	public String[] listGames(String password) throws ClientProtocolException, IOException{
-		Log.d(TAG, "listGames");
+	public String[] listEvents(String password) throws ClientProtocolException, IOException{
+		Log.d(TAG, "listEvents");
 		String sha1password = SHA1.getInstance().digestToString(password);
 		HttpGet request = new HttpGet();
 		try {
@@ -94,4 +94,31 @@ public class MusServiceApi {
 		}
 		return null;
 	}
+
+	public String[] ConfirmEvent(String password, String eventID) throws ClientProtocolException, IOException{
+		Log.d(TAG, "ConfirmEvent");
+		String sha1password = SHA1.getInstance().digestToString(password);
+		HttpGet request = new HttpGet();
+		try {
+			URI reqURI = new URI(uri + "action=confirmassist&password=" + sha1password +"&event=" + eventID);
+			request.setURI(reqURI);
+			HttpResponse response = httpclient.execute(request);
+			Log.d(TAG, response.getStatusLine().getReasonPhrase() + " - "
+					+ response.getStatusLine().getStatusCode());
+
+			InputStream is = response.getEntity().getContent();
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(is));
+			Vector<String> lines = new Vector<String>();
+			String line = null;
+			while ((line = reader.readLine()) != null)
+				lines.add(line);
+			return lines.toArray(new String[lines.size()]);
+		} catch (URISyntaxException e) {
+			Log.e(TAG, "Please verify uri value in assets/api.properties");
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
+

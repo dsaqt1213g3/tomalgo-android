@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import dsa.tomalgo.android.R;
-import dsa.tomalgo.android.api.MusServiceApi;
+import dsa.tomalgo.android.api.TomalgoServiceApi;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -29,8 +29,10 @@ public class MainLayoutActivity extends Activity {
 
 	private String[] values;
 	private JSONArray array;
+	public String username;
+	public String password;
 
-	private class FetchGamesList extends AsyncTask<String, Void, JSONObject> {
+	private class FetchEventsList extends AsyncTask<String, Void, JSONObject> {
 		@Override
 		protected void onPostExecute(JSONObject jsonobject) {
 			
@@ -41,9 +43,9 @@ public class MainLayoutActivity extends Activity {
 					array = jsonobject.getJSONArray("result");
 					String[] values = new String[array.length()];
 					for (int i = 0; i < array.length(); i++) {
-						JSONObject game = array.getJSONObject(i);
-						values[i] = game.getString("text");
-						Log.d(TAG, game.getString("enterprise"));
+						JSONObject event = array.getJSONObject(i);
+						values[i] = event.getString("text");
+						Log.d(TAG, event.getString("enterprise"));
 						
 
 
@@ -60,9 +62,9 @@ public class MainLayoutActivity extends Activity {
 			}
 		}
 
-		private final static String TAG = "FetchGamesList";
+		private final static String TAG = "FetchEventsList";
 
-		FetchGamesList() {
+		FetchEventsList() {
 			super();
 
 		}
@@ -71,11 +73,11 @@ public class MainLayoutActivity extends Activity {
 		protected JSONObject doInBackground(String... params) {
 			JSONObject jsonobject = null;
 			try {
-				Log.d(TAG, "FetchGamesList doInBackground, params[0]: " +params[0]);
-				String content[] = MusServiceApi.getInstance(
-						getApplicationContext()).listGames(params[0]);
+				Log.d(TAG, "FetchEventsList doInBackground, params[0]: " +params[0]);
+				String content[] = TomalgoServiceApi.getInstance(
+						getApplicationContext()).listEvents(params[0]);
 				for (int i = 0; i < content.length; i++)
-					Log.d(FetchGamesList.TAG, content[i]);
+					Log.d(FetchEventsList.TAG, content[i]);
 
 				String json = content[content.length - 1];
 				jsonobject = new JSONObject(json);
@@ -100,15 +102,17 @@ public class MainLayoutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
 		Bundle bundle = this.getIntent().getExtras();
-		Log.d(TAG, bundle.get("password").toString());
+		username = bundle.get("username").toString();
+		password = bundle.get("password").toString();
+		Log.d(TAG, username+" / "+password);
 
 		showDialog(ID_DIALOG_FETCHING);
-		(new FetchGamesList()).execute(bundle.getString("password"));
+		(new FetchEventsList()).execute(bundle.getString("password"));
 
 	}
 
 	private void showList() {
-		ListView listView = (ListView) findViewById(R.id.gameslist);
+		ListView listView = (ListView) findViewById(R.id.eventslist);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -123,8 +127,11 @@ public class MainLayoutActivity extends Activity {
 						ScoreActivity.class);
 				try {
 					Log.d(TAG, array.getJSONObject(position).toString());
-					JSONObject games = array.getJSONObject(position);
-					intent.putExtra("players0", games.getString("post"));
+					JSONObject events = array.getJSONObject(position);
+					intent.putExtra("promo", events.getString("promo"));
+					intent.putExtra("eventID", events.getString("id"));
+					intent.putExtra("username", username);
+					intent.putExtra("password", password);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -150,7 +157,7 @@ public class MainLayoutActivity extends Activity {
 		switch (id) {
 		case ID_DIALOG_FETCHING:
 			ProgressDialog loadingDialog = new ProgressDialog(this);
-			loadingDialog.setMessage("Fetching games...");
+			loadingDialog.setMessage("Fetching events...");
 			loadingDialog.setIndeterminate(true);
 			loadingDialog.setCancelable(false);
 			return loadingDialog;

@@ -6,7 +6,7 @@
     <string name="l_username">Username</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main_layout">Lista de partidas</string>
+    <string name="title_activity_main_layout">Lista de Eventos Vigentes</string>
     <string name="title_activity_score">Resultado</string>
 
 </resources>

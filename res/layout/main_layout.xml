@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <ListView
-        android:id="@+id/gameslist"
+        android:id="@+id/eventslist"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
     </ListView>

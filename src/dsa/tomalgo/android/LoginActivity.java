@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import dsa.tomalgo.android.R;
-import dsa.tomalgo.android.api.MusServiceApi;
+import dsa.tomalgo.android.api.TomalgoServiceApi;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -42,7 +42,7 @@ public class LoginActivity extends Activity {
 			JSONObject jsonobject = null;
 			try {
 				Log.d(TAG, "LoginTask doInBackground");
-				String content[] = MusServiceApi.getInstance(
+				String content[] = TomalgoServiceApi.getInstance(
 						getApplicationContext()).login(params[0], params[1]);
 				for (int i = 0; i < content.length; i++)
 					Log.d(LoginTask.TAG, content[i]);
@@ -101,6 +101,7 @@ public class LoginActivity extends Activity {
 						Log.d(TAG, ("enterprise: " +enterprise));
 						Intent intent = new Intent(activity, MainLayoutActivity.class);
 						Log.d(TAG, intent.toString());
+						intent.putExtra("username", username);
 						intent.putExtra("password", password);
 						Log.d(TAG, "Antes");
 						startActivity(intent);
