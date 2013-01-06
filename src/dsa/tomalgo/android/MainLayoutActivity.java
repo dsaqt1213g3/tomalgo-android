@@ -35,7 +35,7 @@ public class MainLayoutActivity extends Activity {
 	private class FetchEventsList extends AsyncTask<String, Void, JSONObject> {
 		@Override
 		protected void onPostExecute(JSONObject jsonobject) {
-			
+
 			try {
 				String status = (String) jsonobject.get("status");
 				if (status.equals("OK")) {
@@ -46,11 +46,6 @@ public class MainLayoutActivity extends Activity {
 						JSONObject event = array.getJSONObject(i);
 						values[i] = event.getString("text");
 						Log.d(TAG, event.getString("enterprise"));
-						
-
-
-							//JSONObject test = array.getJSONObject(i);
-							//values[i] = test.getString("enterprise");
 					}
 					setValues(values);
 					dismissDialog(ID_DIALOG_FETCHING);
@@ -124,7 +119,7 @@ public class MainLayoutActivity extends Activity {
 			public void onItemClick(AdapterView<?> view, View parent,
 					int position, long id) {
 				Intent intent = new Intent(getApplicationContext(),
-						ScoreActivity.class);
+						EventsActivity.class);
 				try {
 					Log.d(TAG, array.getJSONObject(position).toString());
 					JSONObject events = array.getJSONObject(position);

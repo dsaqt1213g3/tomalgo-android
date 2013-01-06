@@ -13,14 +13,14 @@ import android.app.Activity;
 import android.util.Log;
 import android.widget.TextView;
 
-public class ScoreActivity extends Activity {
-	private final static String TAG = "ScoreActivity";
+public class EventsActivity extends Activity {
+	private final static String TAG = "EventsActivity";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = this.getIntent().getExtras();
-		setContentView(R.layout.score_layout);
+		setContentView(R.layout.events_layout);
 
 		String promo = bundle.getString("promo");
 		String eventID = bundle.getString("eventID");
@@ -42,7 +42,7 @@ public class ScoreActivity extends Activity {
 				String json = content[content.length - 1];
 				event = new JSONObject(json);
 				String status = event.getString("status");
-				String result = event.getString("result");
+				//String result = event.getString("result");
 
 				if (status.equals("OK")){
 					((TextView) findViewById(R.id.PromoResult)).setText(

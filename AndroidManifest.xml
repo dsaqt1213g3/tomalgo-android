@@ -31,7 +31,7 @@
             android:label="@string/title_activity_main_layout" >
         </activity>
         <activity
-            android:name=".ScoreActivity"
+            android:name="dsa.tomalgo.android.EventsActivity"
             android:label="@string/title_activity_score" >
         </activity>
     </application>
