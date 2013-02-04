@@ -44,7 +44,7 @@ public class EventsActivity extends Activity {
 				String status = event.getString("status");
 				//String result = event.getString("result");
 
-				if (status.equals("OK")){
+				if (status.equals("OK") && event.getBoolean("result")){
 					((TextView) findViewById(R.id.PromoResult)).setText(
 							"Has confirmado asistencia al evento correctamente. TE ESPERAMOS "+username+"!!!");
 				}else {
